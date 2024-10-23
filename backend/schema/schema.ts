@@ -16,9 +16,16 @@ const typeDefs = gql`
     images: [String!]!
   }
 
+  type Ticket {
+    id: ID!
+    content: String!
+  }
+
   type Query {
     getCategories: [Category!]!
     getCategory(id: ID!): Category
+
+    getTickets: [Ticket!]!
 
     getProducts: [Product!]!
     getProduct(id: ID!): Product
@@ -54,6 +61,9 @@ const typeDefs = gql`
     createCategory(input: CreateCategoryInput!): Category!
     updateCategory(id: ID!, input: UpdateCategoryInput!): Category!
     deleteCategory(id: ID!): Boolean
+
+    createTicket(content: String!, status: ID!): Ticket!
+    deleteTicket(id: ID!): Boolean
 
     createProduct(input: CreateProductInput!): Product!
     updateProduct(id: ID!, input: UpdateProductInput!): Product!

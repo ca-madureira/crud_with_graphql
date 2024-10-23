@@ -11,13 +11,18 @@ const categoryResolvers = {
     },
   },
   Mutation: {
-    createCategory: async (_: any, args: { name: string }) => {
-      const { name } = args;
+    createCategory: async (_: any, args: { input: { name: string } }) => {
+      const { name } = args.input;
       const newCategory = new CategoryModel({ name });
       return await newCategory.save();
     },
-    updateCategory: async (_: any, args: { id: string; name: string }) => {
-      const { id, name } = args;
+
+    updateCategory: async (
+      _: any,
+      args: { id: string; input: { name?: string } },
+    ) => {
+      const { id, input } = args;
+      const { name } = input;
 
       return await CategoryModel.findByIdAndUpdate(id, { name }, { new: true });
     },
